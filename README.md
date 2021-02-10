@@ -30,7 +30,7 @@ We recommend creating the following conda environment for computation.
 ```bash
 conda create --name aw_contextual python=3.7
 conda activate aw_contextual
-python setup.py develop
+source install.sh
 ```
 
 # Quickstart with model

@@ -30,6 +30,7 @@ setup(name='aw_contextual',
           "jupyterlab>=1.1.4",
           "matplotlib>=3.1.1",
           "seaborn",
+          "sklearn",
       ],
       classifiers=[
           'Development Status :: 1 - Planning',
