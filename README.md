@@ -38,7 +38,7 @@ python setup.py develop
 - To do adaptive weighting, please follow the instructions in ./experiments/README.md.
 - To reproduce results shown in the paper, use
 ```bash
-source activate cb_adaptive
+source activate aw_contextual
 cd ./experiments/
 python simulations.py
 ```
