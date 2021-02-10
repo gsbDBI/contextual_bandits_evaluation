@@ -1,4 +1,4 @@
-h1 align="center">Adaptive Weighting in Contextual Bandits</h1>
+<h1 align="center">Adaptive Weighting in Contextual Bandits</h1>
 
 Models for paper _Off-Policy Evaluation via Adaptive Weighting with Data from Contextual Bandits_.
 
