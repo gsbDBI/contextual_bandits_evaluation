@@ -31,6 +31,7 @@ setup(name='aw_contextual',
           "matplotlib>=3.1.1",
           "seaborn",
           "sklearn",
+          "openml",
       ],
       classifiers=[
           'Development Status :: 1 - Planning',
