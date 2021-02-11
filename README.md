@@ -14,12 +14,12 @@ Models for paper _Off-Policy Evaluation via Adaptive Weighting with Data from Co
 
 *Note: For any questions, please file an issue.*
 
-Adaptive experimental designs can dramatically improve efficiency in randomized trials. But adaptivity also makes offline policy inference challenging. In the paper _Off-line Policy Evaluation via Adaptive Weighting with Data from Contextual Bandits_, we propose a class of estimators that lead to asymptotically normal and consistent policy evaluation. This repo contains reproducible code for the results shown in the paper. 
+Adaptive experimental designs can dramatically improve efficiency in randomized trials. But adaptivity also makes offline policy inference challenging. In the paper _Off-Policy Evaluation via Adaptive Weighting with Data from Contextual Bandits_, we propose a class of estimators that lead to asymptotically normal and consistent policy evaluation. This repo contains reproducible code for the results shown in the paper. 
 
 We organize the code into two directories:
-- ./adaptive is a Python module for doing adaptive weighting developed in the paper.
+- [./adaptive](https://github.com/gsbDBI/contextual_bandits_evaluation/tree/main/adaptive) is a Python module for doing adaptive weighting developed in the paper.
 
-- ./experiments contains python scripts to run experiments and make plots shown in the paper, including:
+- [./experiments](https://github.com/gsbDBI/contextual_bandits_evaluation/tree/main/experiments) contains python scripts to run experiments and make plots shown in the paper, including:
    - collecting contextual bandits data with a Thompson sampling agent;
    - doing off-line policy evaluation using collected data;
    - saving results and making plots. 
@@ -35,13 +35,13 @@ source install.sh
 
 # Quickstart with model
 
-- To do adaptive weighting, please follow the instructions in ./experiments/README.md.
+- To do adaptive weighting, please follow the instructions in [./experiments/README.md](https://github.com/gsbDBI/contextual_bandits_evaluation/blob/main/experiments/README.md).
 - To reproduce results shown in the paper, use
 ```bash
 source activate aw_contextual
 cd ./experiments/
-python simulations.py
+python script_synthetic.py -s 1000
 ```
-Then open `./experiments/plots.ipynb` to load results and make plots. 
+Then open `./experiments/statistics_synthetic.ipynb` to load results and make plots. 
 
 
