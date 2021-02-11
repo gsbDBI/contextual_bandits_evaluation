@@ -14,11 +14,11 @@ and make plots shown in the paper _Off-Policy Evaluation via Adaptive Weighting 
 ## Reproducibility 
 To reproduce results on synthetic data shown in the paper, do
 1. `python script_synthetic.py -s 1000` to run experiments and save results in `./results/`.
-2. Open `statistics_synthetic.ipynbb`, follow the instructions in the notebook to generate plots based on the saved results in `./results/`. 
+2. Open `statistics_synthetic.ipynb`, follow the instructions in the notebook to generate plots based on the saved results in `./results/`. 
 
 To reproduce results on classification datasets shown in the paper, do
 1. `python script_classification.py -s 100 -f {NameOfDataset}` to run experiments and save results in `./results/`.
-2. Open `statistics_classification.ipynbb`, follow the instructions in the notebook to generate plots based on the saved results in `./results/`. 
+2. Open `statistics_classification.ipynb`, follow the instructions in the notebook to generate plots based on the saved results in `./results/`. 
 
 
 ## Quick start for running simulations using synthetic data
