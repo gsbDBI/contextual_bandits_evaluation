@@ -9,8 +9,8 @@ __all__ = ['collect',
            'collect3',
            'expand',
            'draw',
+           'fill_up',
            'apply_floor',
-           'stick_breaking',
            'ks_transform',
            'preprocess',
            'crossfit_indices']
@@ -65,6 +65,19 @@ def expand(values, idx, num_cols):
     for i, (j, v) in enumerate(zip(idx, values)):
         out[i, j] = v
     return out
+
+
+def fill_up(T, idx, probs):
+    """
+    Fill up propensity score matrix 1[W_t=w]*e_t(w)
+    """
+    K = probs.shape[1]
+    P = np.zeros((T, K))
+    idx_s = np.concatenate([[-1], idx[:-1]])
+    for s,e,p in zip(idx_s, idx, probs):
+        P[s+1:e+1] = p
+    return P
+
 
 
 def draw(p):

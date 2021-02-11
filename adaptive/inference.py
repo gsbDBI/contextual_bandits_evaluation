@@ -7,6 +7,26 @@ from scipy.stats import norm
 import warnings
 
 
+def sample_mean(rewards, arms, K):
+    """
+    Compute F_{t} measured sample mean estimator
+
+    INPUT:
+        - rewards: observed rewards of shape [T]
+        - arms: pulled arms of shape [T]
+        - K: number of arms
+
+    Output:
+        - estimate: F_{t} measured sample mean estimator of shape [T,K]
+    """
+    # return F_t measured sample mean
+    T = len(arms)
+    W = expand(np.ones(T), arms, K)
+    Y = expand(rewards, arms, K)
+    estimate = np.cumsum(W * Y, 0) / np.maximum(np.cumsum(W, 0), 1)
+    return estimate
+
+
 def aw_scores(yobs, ws, balwts, K, muhat=None):
     """
     Compute AIPW/doubly robust scores. Return IPW scores if muhat is None.
