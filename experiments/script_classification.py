@@ -1,6 +1,6 @@
 import sys
 from scipy.stats import multivariate_normal
-from adaptive.inference import analyze_by_continuous_X, aw_scores
+from adaptive.inference import analyze, aw_scores
 import argparse
 import os
 import pickle
@@ -132,7 +132,7 @@ if __name__ == '__main__':
         muhat_DM = ridge_muhat_DM(data_exp['xs'], ws, yobs, K)
 
         for policy_m, policy_v, policy_n in zip(policy_mtx, policy_values, policy_names):
-            analysis = analyze_by_continuous_X(
+            analysis = analyze(
                 probs=probs,
                 gammahat=gammahat,
                 policy=policy_m,

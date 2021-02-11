@@ -130,7 +130,7 @@ def calculate_continuous_X_statistics(h, gammahat, policy, policy_value):
     return np.array([Q_estimate-policy_value, V_estimate])
 
 
-def analyze_by_continuous_X(probs, gammahat, policy, policy_value):
+def analyze(probs, gammahat, policy, policy_value):
     """
     Generate statistics of estimating policy values with different estimators.
 

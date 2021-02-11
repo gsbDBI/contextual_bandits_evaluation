@@ -1,6 +1,6 @@
 """This script runs simulations on synthetic dataset."""
 import sys
-from adaptive.inference import analyze_by_continuous_X, aw_scores
+from adaptive.inference import analyze, aw_scores
 import argparse
 import os
 import pickle
@@ -146,7 +146,7 @@ if __name__ == '__main__':
         for Tt in [1000, 3000, 5000, 7000]:
             muhat_DM = ridge_muhat_DM(xs[:Tt], ws[:Tt], yobs[:Tt], K)
             for policy_m, policy_v, policy_n in zip(policy_mtx, policy_values, policy_names):
-                analysis = analyze_by_continuous_X(
+                analysis = analyze(
                     probs=probs[:Tt, :Tt],
                     gammahat=gammahat[:Tt],
                     policy=policy_m[:Tt],
