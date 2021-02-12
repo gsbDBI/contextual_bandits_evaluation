@@ -35,13 +35,12 @@ source install.sh
 
 # Quickstart with model
 
-- To do adaptive weighting, please follow the instructions in [./experiments/README.md](https://github.com/gsbDBI/contextual_bandits_evaluation/blob/main/experiments/README.md).
-- To reproduce results shown in the paper, use
+- To do adaptive weighting and reproduce results shown in the paper, please follow the instructions in [./experiments/README.md](https://github.com/gsbDBI/contextual_bandits_evaluation/blob/main/experiments/README.md).
+- For a quick start, use
 ```bash
 source activate aw_contextual
 cd ./experiments/
-python script_synthetic.py -s 1000
+python script_synthetic.py -T 1000
 ```
-Then open `./experiments/statistics_synthetic.ipynb` to load results and make plots. 
 
 
