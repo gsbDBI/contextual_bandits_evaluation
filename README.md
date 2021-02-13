@@ -25,8 +25,7 @@ We organize the code into two directories:
    - saving results and making plots. 
 
 # Development setup
-
-We recommend creating the following conda environment for computation.
+R and Python are required. We recommend creating the following conda environment for computation.
 ```bash
 conda create --name aw_contextual python=3.7
 conda activate aw_contextual
@@ -36,11 +35,12 @@ source install.sh
 # Quickstart with model
 
 - To do adaptive weighting and reproduce results shown in the paper, please follow the instructions in [./experiments/README.md](https://github.com/gsbDBI/contextual_bandits_evaluation/blob/main/experiments/README.md).
-- For a quick start, use
+- For a quick start on one simulation using synthetic data of sample size 1000 , use
 ```bash
 source activate aw_contextual
 cd ./experiments/
 python script_synthetic.py -T 1000 -s 1 -n test
 ```
+Results will be saved in ./experiments/results
 
 
