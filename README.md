@@ -41,6 +41,6 @@ source activate aw_contextual
 cd ./experiments/
 python script_synthetic.py -T 1000 -s 1 -n test
 ```
-Results will be saved in ./experiments/results
+Results will be saved in ./experiments/results/
 
 
