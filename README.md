@@ -40,7 +40,7 @@ source install.sh
 ```bash
 source activate aw_contextual
 cd ./experiments/
-python script_synthetic.py -T 1000 -s 1
+python script_synthetic.py -T 1000 -s 1 -n test
 ```
 
 
