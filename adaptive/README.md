@@ -1,6 +1,6 @@
 This directory contains the Python module of adaptive weighting developed in the paper _Off-Policy Evaluation via Adaptive Weighting with Data from Contextual Bandits_.
 
-To reproduce results presented in the paper, please go to directory [../experiments](https://github.com/gsbDBI/PolicyLearning/tree/main/scripts) and follow the instructions in the README there. 
+To reproduce results presented in the paper, please go to directory [../experiments](https://github.com/gsbDBI/contextual_bandits_evaluation/tree/main/experiments) and follow the instructions in the README there. 
 
 ## File description
 - `compute.py` contains helper functions to speed up computation. 
