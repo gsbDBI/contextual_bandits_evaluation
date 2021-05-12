@@ -149,7 +149,7 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
     Plot statistics of different estimates across time. 
     """
     col = 'statistic'
-    col_order = ['Bias', 'Bias', 'Var',  '90% coverage of t-stat']
+    col_order = ['Bias', 'Bias', 'Var',  '95% coverage of t-stat']
     confidence = float(col_order[-1][:2])/100
     if row == 'policy':
         row_order = ['optimal-best_arm', 'optimal', 'best_arm']
@@ -177,7 +177,6 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
                     hue_order=order,
                     palette=palette,
                     aspect=1.2,
-                    # markers=markers,
                     linestyles=linestyles,
                     sharex=False,
                     sharey=False,
@@ -189,7 +188,6 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
     for i in range(len(row_order)):
         g.axes[i, 0].clear()
         sns.pointplot(x='T',
-                      # order=order,
                       hue=hue,
                       hue_order=order,
                       palette=palette,
@@ -208,7 +206,6 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
 
         g.axes[i, 2].clear()
         sns.pointplot(x='T',
-                      # order=order,
                       hue=hue,
                       hue_order=order_2,
                       palette=palette,
@@ -226,7 +223,6 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
 
         g.axes[i, -1].clear()
         sns.pointplot(x='T',
-                      # order=order,
                       hue=hue,
                       hue_order=order_2,
                       palette=palette,
@@ -241,11 +237,10 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
         g.axes[i, -1].set_ylabel("")
 
         g.axes[i, -1].axhline(confidence, color="black", linestyle='-.')
-        g.axes[i, -1].set_ylim(0.80, 0.93)
+        g.axes[i, -1].set_ylim(0.87, 0.98)
 
     for ax in g.axes.flat:
         plt.setp(ax.texts, text="")
-        #ax.set_xticklabels(['DM', 'uniform', 'props\nexpected', 'props\nX', 'stabvar\nexpected', 'stabvar\nX'])
     g.col_names = ['RMSE', 'Bias', 'Confidence Interval Radius', col_order[-1]]
     if row == 'experiment':
         g.row_names = ['Signal', 'No Signal']
@@ -253,7 +248,6 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
 
     g.set_xlabels("")
     g.set_ylabels("")
-    # g.set_xticklabels(order,rotation=270)
 
     handles, labels = g._legend_data.values(), g._legend_data.keys()
     new_handles = [Line2D([0], [0], color=pal, linewidth=4, linestyle="--" if (
@@ -265,10 +259,8 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
     g.fig.legend(labels=[names[n] for n in labels], handles=new_handles,
                  loc='center', ncol=len(labels), frameon=False, bbox_to_anchor=(0.5, 0.005))
 
-    # g.fig.tight_layout()
 
     if name is not None:
-        # g.fig.suptitle(f'{name} statistics', x=0.5, y=0.0, fontsize=20)
         g.savefig(f'figures/{name}.eps',  bbox_inches="tight")
     plt.show()
 
@@ -341,15 +333,14 @@ def merge_dataset_df(df_stats):
     T = []
     for config, df_dgp in df_stats.groupby(['dgp', 'policy', 'weight']):
         df_bias = pd.DataFrame.copy(df_dgp.query("statistic=='Bias'"))
-        df_se = pd.DataFrame.copy(df_dgp.query("statistic=='true S.E.'"))
         dgp.append(config[0])
         policy.append(config[1])
         K.append(np.mean(df_dgp['K']))
         p.append(np.mean(df_dgp['p']))
         T.append(np.mean(df_dgp['T']))
         weight.append(config[2])
-        bias.append(np.mean(df_bias['value']))
-        se.append(np.mean(df_se['value']))
+        bias.append(np.mean(df_bias['value'].to_numpy()))
+        se.append(np.std(df_bias['value'].to_numpy()))
     return pd.DataFrame(dict(dgp=dgp, bias=bias, se=se, policy=policy, weight=weight, T=T, K=K, p=p))
 
 
