@@ -13,8 +13,9 @@ and make plots shown in the paper _Off-Policy Evaluation via Adaptive Weighting 
 
 ## Reproducibility 
 To reproduce results on synthetic data shown in the paper, do
-1. `python script_synthetic.py -s 1000` to run experiments and save results in `./results/`.
-2. Open `statistics_synthetic.ipynb`, follow the instructions in the notebook to generate plots based on the saved results in `./results/`. 
+1. Run DGP with signal: `python script_synthetic.py -s 1000 -n synthetic_signal --signal 0.5` to run experiments and save results in `./results/`.
+2. Run DGP without signal: `python script_synthetic.py -s 1000 -n synthetic_nosignal --signal 0.0` to run experiments and save results in `./results/`.
+3. Open `statistics_synthetic.ipynb`, follow the instructions in the notebook to generate plots based on the saved results in `./results/`. 
 
 To reproduce results on classification datasets shown in the paper, do
 1. `python script_classification.py -s 100 -f {NameOfDataset}` to run experiments and save results in `./results/`.
@@ -30,7 +31,6 @@ from adaptive.experiment import *
 from adaptive.ridge import *
 from adaptive.datagen import *
 from adaptive.saving import *
-import openml
 ```
 ### 1. Collecting contextual bandits data
 ```python
