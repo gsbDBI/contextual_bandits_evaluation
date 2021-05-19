@@ -144,14 +144,17 @@ def analyze(probs, gammahat, policy, policy_value):
         a dictionary with keys to be evaluation method and values to be (bias, variance) of corresponding estimator.
     """
     T, K = gammahat.shape
+    mask = np.ones((T, T))
+    for i in range(1,T):
+        mask[i, i:] = 0
+
     all_condVars = np.sum(policy ** 2 / probs, -1)  # (T, T)
     all_condVars_inverse = np.zeros_like(all_condVars)
     all_condVars_inverse[all_condVars > 1e-6] = 1 / \
         all_condVars[all_condVars > 1e-6]
-    expected_condVars = np.mean(all_condVars, 1)
-    expected_condVars_inverse = np.mean(all_condVars_inverse, 1)
-    #expected_condVars_inverse = np.zeros_like(expected_condVars)
-    #expected_condVars_inverse[expected_condVars > 1e-6] = 1 / expected_condVars[expected_condVars > 1e-6]
+    expected_condVars = np.sum(all_condVars * mask, 1) / np.sum(mask, 1)
+    expected_condVars_inverse = np.zeros_like(expected_condVars)
+    expected_condVars_inverse[expected_condVars > 1e-6] = 1 / expected_condVars[expected_condVars > 1e-6]
 
     return dict(
         uniform=estimate(np.arange(T), gammahat, policy, policy_value),
