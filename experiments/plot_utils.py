@@ -265,6 +265,59 @@ def plot_statistics(df_stats, row='policy', name=None, order=None, order_name=No
     plt.show()
 
 
+def plot_normality(df_stats, row='policy', col=None, col_order=None, name=None):
+
+
+    if row == 'policy':
+        row_order = ['optimal-best_arm', 'optimal', 'best_arm']
+    else:
+        row_order = ['Signal', 'No Signal']
+    col = 'weight'
+    col_order =['uniform', 'propscore_expected', 'propscore_X',
+            'lvdl_expected', 'lvdl_X'] 
+    df_tstat = df_stats.query(f"statistic == 't-stat'")
+    df_relerror = df_stats.query(f"statistic == 'R.E.'")
+
+    # ==== histogram of normalized error ====
+
+    ncols = 2
+    gh = sns.FacetGrid(
+                       hue="statistic",
+                       hue_order=['t-stat'],
+                       #col_wrap=ncols,
+                       col=col,
+                       col_order=col_order,
+                       row=row,
+                       row_order=row_order,
+                       sharex=False,
+                       height=4,
+                       aspect=1.6,
+                       sharey=True,
+                       margin_titles=True,
+                       data=pd.concat([df_tstat, df_relerror]))
+
+    gh = gh.map(sns.histplot, "value", stat='density')
+
+    for ax in gh.axes.flat:
+        plt.setp(ax.texts, text="")
+    gh.col_names = ['DR', 'non-contextual MinVar', 'contextual MinVar',
+            'non-contextual StableVar', 'contextual StableVar']
+    gh.set_titles(row_template="{row_name}", col_template="{col_name}")
+    xs = np.linspace(-3, 3)
+    for i, ax in enumerate(gh.axes.flatten()):
+        ax.plot(xs, norm.pdf(xs), label='N(0,1)', **
+                {"color": "black", "linestyle": "--", "linewidth": 2})
+        ax.set(xlabel="")
+        ax.set_xticks([-2,2])
+        ax.set_xlim(-4, 4)
+    gh.fig.legend(labels=['N(0,1)', 't-stats'], frameon=False, ncol=2,
+                  loc='center',  bbox_to_anchor=(0.5, 0.05))
+    if name is not None:
+        gh.savefig(f'figures/{name}.eps',  bbox_inches = "tight")
+    plt.show()
+
+
+
 def analyze_characteristics(df_stats):
     """
     Analyze dataset characteristics including #features, #classes, #observations.
